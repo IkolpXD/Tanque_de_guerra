@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 18:52:17 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/02 19:18:15 by made-jes         ###   ########.fr       */
+/*   Created: 2024/10/30 11:07:35 by made-jes          #+#    #+#             */
+/*   Updated: 2025/03/16 17:22:35 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*line;
-	//t_token	*tokens;
+	char		ch;
+	const char	*last;
 
-	while (1)
+	ch = (char)c;
+	last = s;
+	while (*last)
+		last++;
+	while (last >= s)
 	{
-		line = readline("minishell$ ");
-		//printf("%s\n", line);
-		if (!line)
-			break ;
-		if (line && *line)
-			add_history(line);
-		//tokens = lexer(line);
-		free(line);
+		if (*last == ch)
+			return ((char *)last);
+		last--;
 	}
-	return (0);
+	return (NULL);
 }
+
+/*int	main()
+{
+	char	*s = "Bom dia";
+	int	c = 'd';
+
+	printf("%s\n", ft_strrchr(s, c));
+	printf("%s\n", strrchr(s, c));
+	return (0);
+}*/

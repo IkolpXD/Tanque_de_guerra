@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:50:01 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/02 19:17:43 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:29:06 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <readline/history.h>
 # include <readline/readline.h>
+# include "../libft/libft.h"
 # include <signal.h>
 # include <stdlib.h>
 # include <stdlib.h>
@@ -37,5 +38,7 @@ typedef struct s_token
 	t_token_type	type;
 	struct s_token	*next;
 }				t_token;
+
+void	lexer(char *line);
 
 #endif
