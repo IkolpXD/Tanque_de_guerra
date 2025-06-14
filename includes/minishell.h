@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:50:01 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/14 15:08:34 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:48:46 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_token
 	t_token_type	type;
 	struct s_token	*next;
 }				t_token;
+
+typedef struct s_shell
+{
+	t_token		*tokens;
+}				t_shell;
+
+t_shell			*get_shell(void);
 
 //Lexer
 t_token			*lexer(char *line);

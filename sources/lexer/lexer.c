@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:47:37 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/14 15:14:37 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:47:41 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_token	*lexer(char *line)
 		return (NULL);
 	token_list = create_list(result);
 	free_split(result);
+	get_shell()->tokens = token_list;
 	return (token_list);
 }
 
@@ -77,8 +78,11 @@ t_token_type	get_token_type(char *line)
 		return (APPEND);
 	else if (ft_strncmp(line, "<", 2) == 0)
 		return (REDIR_IN);
-	else if (ft_strncmp("line", ">", 2) == 0)
+	else if (ft_strncmp(line, ">", 2) == 0)
 		return (REDIR_OUT);
+	else if ((line[0] == '"' && line[ft_strlen(line) - 1] == '"')
+		|| (line[0] == '\'' && line[ft_strlen(line) - 1] == '\''))
+		return (STR);
 	else
 		return (WORD);
 }
