@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+         #
+#    By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/04 17:35:32 by made-jes          #+#    #+#              #
-#    Updated: 2025/06/05 19:31:20 by made-jes         ###   ########.fr        #
+#    Updated: 2025/06/14 14:58:07 by made-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_DIR = ./obj
 
 # Source files
 
-SOURCES = main.c lexer.c
+SOURCES = main.c lexer.c utils.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SOURCES))
 

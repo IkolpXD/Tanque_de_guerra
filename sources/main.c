@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:52:17 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/05 19:31:42 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:11:40 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(void)
 {
 	char	*line;
-	//t_token	*tokens;
+	t_token	*tokens;
 
 	while (1)
 	{
@@ -24,8 +24,13 @@ int	main(void)
 			break ;
 		if (line && *line)
 			add_history(line);
-		lexer(line);
-		//tokens = lexer(line);
+		tokens = lexer(line);
+		while (tokens)
+		{
+			printf("Token: %-10s Type: %d\n", tokens->value, tokens->type);
+			tokens = tokens->next;
+		}
+		free_token_list(tokens);
 		free(line);
 	}
 	return (0);

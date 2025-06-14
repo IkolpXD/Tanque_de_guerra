@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:50:01 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/05 19:29:06 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:08:34 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_token
 	struct s_token	*next;
 }				t_token;
 
-void	lexer(char *line);
+//Lexer
+t_token			*lexer(char *line);
+t_token_type	get_token_type(char *line);
+
+//Freeing
+void			free_split(char **arr);
+void			free_token_list(t_token *tokens);
 
 #endif

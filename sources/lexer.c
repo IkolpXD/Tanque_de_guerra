@@ -3,29 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:47:37 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/05 19:32:46 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:14:37 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	lexer(char *line)
+static t_token	*new_token(char *value)
 {
-	//int		i;
-	char	**result;
+	t_token	*token;
 
-	//i = 0;
-	if (!line)
-		return ;
-	result = ft_split(line, '|');
-	if (!result)
-		return ;
-	/*while (result[i])
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->value = ft_strdup(value);
+	token->type = get_token_type(value);
+	token->next = NULL;
+	return (token);
+}
+
+static t_token	*create_list(char **result)
+{
+	t_token	*head;
+	t_token	*tail;
+	t_token	*new;
+	int		i;
+
+	head = NULL;
+	tail = NULL;
+	i = 0;
+	while (result[i])
 	{
-		printf("%s\n", result[i]);
+		new = new_token(result[i]);
+		if (!new)
+			return (NULL);
+		if (!head)
+			head = new;
+		else
+			tail->next = new;
+		tail = new;
 		i++;
-	}*/
+	}
+	return (head);
+}
+
+t_token	*lexer(char *line)
+{
+	char	**result;
+	t_token	*token_list;
+
+	if (!line)
+		return (NULL);
+	result = ft_split(line, ' ');
+	if (!result)
+		return (NULL);
+	token_list = create_list(result);
+	free_split(result);
+	return (token_list);
+}
+
+t_token_type	get_token_type(char *line)
+{
+	if (!line)
+		return (UNKNOWN);
+	if (ft_strncmp(line, "|", 2) == 0)
+		return (PIPE);
+	else if (ft_strncmp(line, "<<", 3) == 0)
+		return (HEREDOC);
+	else if (ft_strncmp(line, ">>", 3) == 0)
+		return (APPEND);
+	else if (ft_strncmp(line, "<", 2) == 0)
+		return (REDIR_IN);
+	else if (ft_strncmp("line", ">", 2) == 0)
+		return (REDIR_OUT);
+	else
+		return (WORD);
 }
