@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:50:01 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/14 19:48:46 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:25:33 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ t_shell			*get_shell(void);
 
 //Lexer
 t_token			*lexer(char *line);
+t_token			*new_token(char *value);
+t_token			*create_list(char **result);
+void			fill_tokens(char **result, const char *line);
 t_token_type	get_token_type(char *line);
 
 //Freeing

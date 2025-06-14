@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: made-jes <made-jes@student.42.fr>          +#+  +:+       +#+         #
+#    By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 14:39:36 by made-jes          #+#    #+#              #
-#    Updated: 2025/03/21 22:39:12 by made-jes         ###   ########.fr        #
+#    Updated: 2025/06/14 20:42:40 by made-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SOURCES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		  ft_atoll.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
 		  ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 		  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-		  get_next_line.c get_next_line_utils.c ft_atoi.c \
+		  get_next_line.c get_next_line_utils.c ft_atoi.c ft_is_space.c\
 
 OBJECTS = $(SOURCES:.c=.o)
 
