@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:50:01 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/14 22:25:33 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:48:41 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_shell
 }				t_shell;
 
 t_shell			*get_shell(void);
+void			run_prompt(void);
 
 //Lexer
 t_token			*lexer(char *line);
@@ -52,6 +53,9 @@ t_token			*new_token(char *value);
 t_token			*create_list(char **result);
 void			fill_tokens(char **result, const char *line);
 t_token_type	get_token_type(char *line);
+
+//Parsing
+int				validate_syntax(t_token *tokens);
 
 //Freeing
 void			free_split(char **arr);

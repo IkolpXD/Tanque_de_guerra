@@ -6,7 +6,7 @@
 /*   By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:52:17 by made-jes          #+#    #+#             */
-/*   Updated: 2025/06/14 22:47:13 by made-jes         ###   ########.fr       */
+/*   Updated: 2025/06/15 19:34:14 by made-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,7 @@ t_shell	*get_shell(void)
 
 int	main(void)
 {
-	char	*line;
-	t_token	*tokens;
-
 	while (1)
-	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-			add_history(line);
-		tokens = lexer(line);
-		get_shell()->tokens = tokens;
-		while (tokens)
-		{
-			printf("Token: %-10s Type: %d\n", tokens->value, tokens->type);
-			tokens = tokens->next;
-		}
-		free_token_list(tokens);
-		free(line);
-	}
+		run_prompt();
 	return (0);
 }

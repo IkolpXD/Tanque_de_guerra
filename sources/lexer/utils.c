@@ -12,61 +12,82 @@
 
 #include "../includes/minishell.h"
 
-t_token_type	get_token_type(char *line)
+static char	*handle_quotes(const char *line, int *i)
 {
-	if (!line)
-		return (UNKNOWN);
-	if (ft_strncmp(line, "|", 2) == 0)
-		return (PIPE);
-	else if (ft_strncmp(line, "<<", 3) == 0)
-		return (HEREDOC);
-	else if (ft_strncmp(line, ">>", 3) == 0)
-		return (APPEND);
-	else if (ft_strncmp(line, "<", 2) == 0)
-		return (REDIR_IN);
-	else if (ft_strncmp(line, ">", 2) == 0)
-		return (REDIR_OUT);
-	else if ((line[0] == '"' && line[ft_strlen(line) - 1] == '"')
-		|| (line[0] == '\'' && line[ft_strlen(line) - 1] == '\''))
-		return (STR);
-	else
-		return (WORD);
-}
+	int		start;
+	char	quote;
 
-t_token	*new_token(char *value)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->value = ft_strdup(value);
-	token->type = get_token_type(value);
-	token->next = NULL;
-	return (token);
-}
-
-t_token	*create_list(char **result)
-{
-	t_token	*head;
-	t_token	*tail;
-	t_token	*new;
-	int		i;
-
-	head = NULL;
-	tail = NULL;
-	i = 0;
-	while (result[i])
+	start = *i;
+	quote = line[(*i)];
+	(*i)++;
+	while (line[*i])
 	{
-		new = new_token(result[i]);
-		if (!new)
-			return (NULL);
-		if (!head)
-			head = new;
-		else
-			tail->next = new;
-		tail = new;
-		i++;
+		if (line[*i] == '\\' && quote == '"' && line[*i + 1])
+		{
+			*i += 2;
+			continue ;
+		}
+		if (line[*i] == quote)
+		{
+			(*i)++;
+			break ;
+		}
+		(*i)++;
 	}
-	return (head);
+	return (ft_substr(line, start, *i - start));
+}
+
+static char	*handle_double_operator(const char *line, int *i)
+{
+	char	*op;
+
+	op = ft_substr(line, *i, 2);
+	*i += 2;
+	return (op);
+}
+
+static char	*handle_single_operator(const char *line, int *i)
+{
+	char	*op;
+
+	op = ft_substr(line, (*i)++, 1);
+	return (op);
+}
+
+static char	*handle_word(const char *line, int *i)
+{
+	int	start;
+
+	start = *i;
+	while (line[*i] && !ft_is_space(line[*i]) && line[*i] != '>'
+		&& line[*i] != '<' && line[*i] != '|' && line[*i] != '\''
+		&& line[*i] != '\"')
+		(*i)++;
+	return (ft_substr(line, start, *i - start));
+}
+
+void	fill_tokens(char **result, const char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		while (ft_is_space(line[i]))
+			i++;
+		if (line[i] == '\0')
+			break ;
+		if (line[i] == '\'' || line[i] == '\"')
+			result[j++] = handle_quotes(line, &i);
+		else if ((line[i] == '>' && line[i + 1] == '>')
+			|| (line[i] == '<' && line[i + 1] == '<'))
+			result[j++] = handle_double_operator(line, &i);
+		else if (line[i] == '>' || line[i] == '<' || line[i] == '|')
+			result[j++] = handle_single_operator(line, &i);
+		else
+			result[j++] = handle_word(line, &i);
+	}
+	result[j] = NULL;
 }

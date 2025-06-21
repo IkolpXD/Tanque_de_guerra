@@ -6,7 +6,7 @@
 #    By: made-jes <made-jes@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/04 17:35:32 by made-jes          #+#    #+#              #
-#    Updated: 2025/06/14 22:26:01 by made-jes         ###   ########.fr        #
+#    Updated: 2025/06/15 20:37:23 by made-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJ_DIR = ./obj
 
 # Source files
 
-SOURCES = main.c lexer/lexer.c lexer/utils.c /lexer/utils2.c utils.c
+SOURCES = main.c lexer/lexer.c lexer/utils.c utils.c prompt.c /parser/parser.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SOURCES))
 
